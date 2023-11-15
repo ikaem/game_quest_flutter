@@ -71,6 +71,12 @@ class GameQuestGame extends FlameGame with TapCallbacks {
     for (final block in segment) {
       switch (block.blockType) {
         case GroundBlock:
+          add(
+            GroundBlock(
+              gridPosition: block.gridPosition,
+              xOffset: xPositionOffset,
+            ),
+          );
           break;
         case PlatformBlock:
           // add component of PlatformBlock with add()
