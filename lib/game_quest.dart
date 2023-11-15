@@ -1,4 +1,5 @@
 import 'package:flame/camera.dart';
+import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/widgets.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ import 'package:game/objects/ground_block.dart';
 import 'package:game/objects/platform_block.dart';
 import 'package:game/objects/star.dart';
 
-class GameQuestGame extends FlameGame {
+class GameQuestGame extends FlameGame with TapCallbacks {
   GameQuestGame();
 
   late EmberPlayer _ember;
@@ -17,6 +18,16 @@ class GameQuestGame extends FlameGame {
   // for purposes objec components of game movement
   double objectSpeed = 0.0;
   late final CameraComponent cameraComponent;
+
+  @override
+  void onTapUp(TapUpEvent event) {
+    _ember.move(0);
+  }
+
+  @override
+  void onTapDown(TapDownEvent event) {
+    _ember.move(1);
+  }
 
   @override
   final world = World();
