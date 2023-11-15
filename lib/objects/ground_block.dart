@@ -1,6 +1,9 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flutter/material.dart';
 import 'package:game/game_quest.dart';
+
+final UniqueKey _blockKey = UniqueKey();
 
 class GroundBlock extends SpriteComponent with HasGameRef<GameQuestGame> {
   final Vector2 gridPosition;

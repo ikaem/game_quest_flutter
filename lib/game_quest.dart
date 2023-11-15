@@ -15,6 +15,10 @@ class GameQuestGame extends FlameGame with TapCallbacks {
 
   late EmberPlayer _ember;
 
+  // register block globally - the last ground block to be loaded
+  late double lastBlockXPosition = 0.0;
+  late UniqueKey lastBlockKey;
+
   // for purposes objec components of game movement
   double objectSpeed = 0.0;
   late final CameraComponent cameraComponent;
