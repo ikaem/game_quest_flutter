@@ -22,10 +22,23 @@ class EmberPlayer extends SpriteAnimationComponent
 
   @override
   void update(double dt) {
-    // calculate velocity based on direction
-    velocity.x = horizontalDirection * moveSpeed;
+    game.objectSpeed = 0;
 
-    // update position based on velocity and time since the last update
+    final positionX = position.x;
+    final gameSizeX = game.size.x;
+
+    if (position.x - 18 <= 0 && horizontalDirection < 0) {
+      // TODO this will never happen - prevent going left
+      velocity.x = 0;
+    } else if (position.x + 32 >= game.size.x / 2 && horizontalDirection > 0) {
+      // prevent from going half screen
+      velocity.x = 0;
+      // TODO this will move the world in opposite direction in negative speed of the player
+      game.objectSpeed = -moveSpeed;
+    } else {
+      velocity.x = horizontalDirection * moveSpeed;
+    }
+
     position += velocity * dt;
 
     super.update(dt);
