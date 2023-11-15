@@ -3,18 +3,18 @@ import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:game/game_quest.dart';
 
-final UniqueKey _blockKey = UniqueKey();
-
 class GroundBlock extends SpriteComponent with HasGameRef<GameQuestGame> {
-  final Vector2 gridPosition;
-  double xOffset;
-
-  final Vector2 velocity = Vector2.zero();
+  final UniqueKey _blockKey = UniqueKey();
 
   GroundBlock({
     required this.gridPosition,
     required this.xOffset,
   }) : super(size: Vector2.all(64), anchor: Anchor.bottomLeft);
+
+  final Vector2 gridPosition;
+  double xOffset;
+
+  final Vector2 velocity = Vector2.zero();
 
   @override
   void onLoad() {
@@ -25,6 +25,14 @@ class GroundBlock extends SpriteComponent with HasGameRef<GameQuestGame> {
       game.size.y - gridPosition.y * size.y,
     );
     add(RectangleHitbox(collisionType: CollisionType.passive));
+
+    // if this is the last block (we have 10 block grid on screen)
+    // and this block's position is bigger then global last block x position,
+    // we update the global last block x position and key
+    if (gridPosition.x == 9 && position.x > game.lastBlockXPosition) {
+      game.lastBlockKey = _blockKey;
+      game.lastBlockXPosition = position.x + size.x;
+    }
   }
 
   @override
