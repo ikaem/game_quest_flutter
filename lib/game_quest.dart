@@ -1,7 +1,12 @@
+import 'package:flame/camera.dart';
 import 'package:flame/game.dart';
+import 'package:flame/widgets.dart';
 
 class GameQuestGame extends FlameGame {
   GameQuestGame();
+
+  final world = World();
+  late final CameraComponent cameraComponent;
 
   @override
   Future<void> onLoad() async{
@@ -16,5 +21,14 @@ class GameQuestGame extends FlameGame {
       'star.png',
       'water_enemy.png',
     ]);
+
+
+    cameraComponent = CameraComponent(world: world);
+    // for some reason, we assume that camera position is top left
+    cameraComponent.viewfinder.anchor = Anchor.topLeft;
+
+    // adding compoennts to game?
+    addAll([cameraComponent, world]);
+
   }
 }
