@@ -12,6 +12,8 @@ class GameQuestGame extends FlameGame {
   GameQuestGame();
 
   late EmberPlayer _ember;
+  // for purposes objec components of game movement
+  double objectSpeed = 0.0;
 
   final world = World();
   late final CameraComponent cameraComponent;
