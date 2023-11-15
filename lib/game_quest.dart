@@ -60,4 +60,20 @@ class GameQuestGame extends FlameGame {
       }
     }
   }
+
+  void initializeGame() {
+    // assumption of screen size
+    // it is mobile, so small
+    const screenWidth = 320;
+    // maybe we make sure we have 10 segments of 6.4 pixels each? not very good
+    final segmentsToLoad = (size.x / 64).ceil();
+    // clamp segments to load in range
+    segmentsToLoad.clamp(0, segments.length);
+
+
+    for(var i = 0; i <= segmentsToLoad; i ++) {
+      // not sure what this other argument does
+      loadGameSegments(i, (64 * i).toDouble());
+    }
+  }
 }
