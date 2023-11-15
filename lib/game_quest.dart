@@ -16,6 +16,7 @@ class GameQuestGame extends FlameGame {
   // for purposes objec components of game movement
   double objectSpeed = 0.0;
 
+  @override
   final world = World();
   late final CameraComponent cameraComponent;
 
@@ -72,9 +73,9 @@ class GameQuestGame extends FlameGame {
     // maybe we make sure we have 10 segments of 6.4 pixels each? not very good
     final segmentsToLoad = (size.x / 64).ceil();
     // clamp segments to load in range
-    segmentsToLoad.clamp(0, segments.length);
+    final realSegmentsToLoad = segmentsToLoad.clamp(0, segments.length);
 
-    for (var i = 0; i <= segmentsToLoad; i++) {
+    for (var i = 0; i < realSegmentsToLoad; i++) {
       // not sure what this other argument does
       loadGameSegments(i, (64 * i).toDouble());
     }
