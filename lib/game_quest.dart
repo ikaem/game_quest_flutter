@@ -33,14 +33,10 @@ class GameQuestGame extends FlameGame {
     cameraComponent = CameraComponent(world: world);
     // for some reason, we assume that camera position is top left
     cameraComponent.viewfinder.anchor = Anchor.topLeft;
-
     // adding compoennts to game?
     addAll([cameraComponent, world]);
 
-    // define ember character
-    // now the chracter should be present on the screen
-    _ember = EmberPlayer(position: Vector2(128, canvasSize.y - 70));
-    world.add(_ember);
+    initializeGame();
   }
 
   // this is to load blocks into the world
@@ -70,10 +66,14 @@ class GameQuestGame extends FlameGame {
     // clamp segments to load in range
     segmentsToLoad.clamp(0, segments.length);
 
-
-    for(var i = 0; i <= segmentsToLoad; i ++) {
+    for (var i = 0; i <= segmentsToLoad; i++) {
       // not sure what this other argument does
       loadGameSegments(i, (64 * i).toDouble());
     }
+
+    // define ember character
+    // now the chracter should be present on the screen
+    _ember = EmberPlayer(position: Vector2(128, canvasSize.y - 70));
+    world.add(_ember);
   }
 }
