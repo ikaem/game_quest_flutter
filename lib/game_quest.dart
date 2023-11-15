@@ -1,9 +1,12 @@
 import 'package:flame/camera.dart';
 import 'package:flame/game.dart';
 import 'package:flame/widgets.dart';
+import 'package:game/actors/ember.dart';
 
 class GameQuestGame extends FlameGame {
   GameQuestGame();
+
+  late EmberPlayer _ember;
 
   final world = World();
   late final CameraComponent cameraComponent;
@@ -29,6 +32,11 @@ class GameQuestGame extends FlameGame {
 
     // adding compoennts to game?
     addAll([cameraComponent, world]);
+
+    // define ember character
+    // now the chracter should be present on the screen
+    _ember = EmberPlayer(position: Vector2(128, canvasSize.y - 70));
+    world.add(_ember);
 
   }
 }
