@@ -39,6 +39,14 @@ class GroundBlock extends SpriteComponent with HasGameRef<GameQuestGame> {
   void update(double dt) {
     velocity.x = game.objectSpeed;
     position += velocity * dt;
+
+    // update game's last block x position and key if this is the last block
+    if (gridPosition.x == 9) {
+      if (game.lastBlockKey == _blockKey) {
+        game.lastBlockXPosition = position.x + size.x;
+      }
+    }
+
     super.update(dt);
   }
 }
