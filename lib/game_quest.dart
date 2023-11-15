@@ -1,6 +1,7 @@
 import 'package:flame/camera.dart';
 import 'package:flame/game.dart';
 import 'package:flame/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:game/actors/ember.dart';
 import 'package:game/actors/water_enemy.dart';
 import 'package:game/managers/segment_manager.dart';
@@ -15,10 +16,15 @@ class GameQuestGame extends FlameGame {
 
   // for purposes objec components of game movement
   double objectSpeed = 0.0;
+  late final CameraComponent cameraComponent;
 
   @override
   final world = World();
-  late final CameraComponent cameraComponent;
+
+  @override
+  Color backgroundColor() {
+    return const Color.fromARGB(255, 173, 223, 247);
+  }
 
   @override
   Future<void> onLoad() async {
