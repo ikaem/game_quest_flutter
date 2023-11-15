@@ -12,6 +12,7 @@ class GameQuestGame extends FlameGame {
   GameQuestGame();
 
   late EmberPlayer _ember;
+
   // for purposes objec components of game movement
   double objectSpeed = 0.0;
 
@@ -50,6 +51,11 @@ class GameQuestGame extends FlameGame {
         case GroundBlock:
           break;
         case PlatformBlock:
+          // add component of PlatformBlock with add()
+          // we have these values on the block itself
+          add(PlatformBlock(
+              gridPosition: block.gridPosition, xOffset: xPositionOffset));
+
           break;
         case Star:
           break;
