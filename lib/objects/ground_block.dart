@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:game/game_quest.dart';
+import 'package:game/managers/segment_manager.dart';
 
 class GroundBlock extends SpriteComponent with HasGameRef<GameQuestGame> {
   final UniqueKey _blockKey = UniqueKey();
@@ -39,6 +42,17 @@ class GroundBlock extends SpriteComponent with HasGameRef<GameQuestGame> {
   void update(double dt) {
     velocity.x = game.objectSpeed;
     position += velocity * dt;
+
+    // remove block from parent when off the screen
+    if (position.x < -size.x) {
+      removeFromParent();
+
+      // if this is first block of the segment, lets load a random segment
+      if (gridPosition.x == 0) {
+        final randomSegmentIndex = Random().nextInt(segments.length);
+        game.loadGameSegments(randomSegmentIndex, game.lastBlockXPosition);
+      }
+    }
 
     // update game's last block x position and key if this is the last block
     if (gridPosition.x == 9) {
